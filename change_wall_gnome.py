@@ -11,7 +11,7 @@ nasa_api_key="uStkwuzro4oIbu1kdJfv5s5X14HPnx42WE01QStu"
 filepath ="/home/ganesh/projects/wallpapers"
 
 
-def setNASAPOTD(nasa_api_key,date=None):
+def setNASAPOTD(date=None):
     #getting image url
     #getting timestamp to save as imagename
     if date is not None:
@@ -68,10 +68,11 @@ def getTimeStamp():
     timestamp = now.strftime("%Y-%m-%d")
     return timestamp
 
-potdType = input("if you wanna set nasa potd type N or if you want Bing POTD type B")
-if(potdType == "N" or potdType == "n"):
-    setNASAPOTD(nasa_api_key)
-elif (potdType == "B" or potdType == "b"):
-    setBingPOTD()
-else:
-    print("invalid input try again")
+if __name__ == '__main__':
+    potdType = input("if you wanna set nasa potd type N or if you want Bing POTD type B \n")
+    if(potdType == "N" or potdType == "n"):
+        setNASAPOTD()
+    elif (potdType == "B" or potdType == "b"):
+        setBingPOTD()
+    else:
+        print("invalid input try again")

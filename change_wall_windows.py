@@ -5,37 +5,38 @@ import re
 import datetime
 import os
 
-contents = request.urlopen("http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US").read()
+def setBingWallpaper():
+    contents = request.urlopen("http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US").read()
 
-msg=json.loads(contents)
+    msg=json.loads(contents)
 
-images = msg['images']
+    images = msg['images']
 
-images = images[0]
+    images = images[0]
 
-data = images['url']
+    data = images['url']
 
-print(data)
+    print(data)
 
-now = datetime.datetime.now()
+    now = datetime.datetime.now()
 
-timestamp = now.strftime("%Y-%m-%d")
+    timestamp = now.strftime("%Y-%m-%d")
 
-print(timestamp)
+    print(timestamp)
 
-pattern = re.compile(r'jpg')
-if(bool(re.search(pattern,data))):
+    pattern = re.compile(r'jpg')
+    if(bool(re.search(pattern,data))):
 
-    print("image found")
-    
-    base = "http://www.bing.com"
+        print("image found")
+        
+        base = "http://www.bing.com"
 
-    downurl = base + data
+        downurl = base + data
 
-    filename ="C:\\flutter\\wallpaper\\download-"+timestamp+".jpg"
+        filename ="C:\\flutter\\wallpaper\\download-"+timestamp+".jpg"
 
-    request.urlretrieve(downurl,filename)
+        request.urlretrieve(downurl,filename)
 
-    pathToBmp = os.path.normpath(filename)
+        pathToBmp = os.path.normpath(filename)
 
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, pathToBmp , 3)
+        ctypes.windll.user32.SystemParametersInfoW(20, 0, pathToBmp , 3)
